@@ -87,7 +87,7 @@ class LinkedList
 	def to_s#represents your linked list objects as strings so that you can preview them in the console
 		msg = ""
 		start = self.head
-		return msg if self.head.next_node == nil
+		return "#{self.head.value} -> nil" if self.head.next_node == nil
 		while start.next_node != nil
 			msg << "#{start.value} ->"
 			start = start.next_node
@@ -132,3 +132,5 @@ puts list_1.size
 #puts list_1.contains?("apple")
 puts list_1.find("3")
 puts list_1.to_s
+list2 = LinkedList.new(node_app)
+puts list2.to_s
