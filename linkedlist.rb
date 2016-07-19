@@ -6,6 +6,7 @@ class LinkedList
 	end
 
 	def append(node)#adds value to the end of the list
+		self.tail.next_node = node
 	end
 
 	def preappend(node)#adds value to the begining of the list
@@ -13,23 +14,38 @@ class LinkedList
 		@head = node
 	end
 
-	def size(node)#not node but cant think of what to put here
+	def size#returns the size of the list
+		count = 1 
+		size = @head
+		while size.next_node != nil
+			size = size.next_node
+			count += 1
+		end
+		count
 	end
 
 	def head#returns the first value of the list
 		@head
 	end
 
-	def tail(node)#returns the last value of the list
+	def tail#returns the last value of the list
+		tail = @head
+		while tail.next_node != nil
+			tail = tail.next_node
+		end
+		tail
 	end
 
-	def at(index)#returns the value at the given index
+	def at(index, max = self.size, min = 0, midpoint = max/2)#returns the value at the given index
+		return self.head if index == 0
+		#return self.head.index
+
 	end
 
 	def pop #removes the last element
 	end
 
-	def contains? #returns true if the passed value is in the list otherwise returns false
+	def contains?(value) #returns true if the passed value is in the list otherwise returns false
 	end
 
 	def find(data)#returns the index value for the passed value or nil if not found
@@ -61,6 +77,13 @@ node_2 = Node.new("2")
 node_1 = Node.new("1")
 
 list_1 = LinkedList.new(node_1)
+
+list_1.preappend(node_2)
+list_1.preappend(node_3)
+list_1.preappend(node_4)
+list_1.preappend(node_5)
+
+list_1.append(node_app)
 puts list_1.inspect
-list_1.append(node_2)
+puts list_1.size
 
