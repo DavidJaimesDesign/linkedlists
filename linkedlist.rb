@@ -36,28 +36,64 @@ class LinkedList
 		tail
 	end
 
-	def at(index, max = self.size, min = 0, midpoint = max/2)#returns the value at the given index
+	def at(index)#returns the value at the given index
 		return self.head if index == 0
-		#return self.head.index
-
+		return "INDEX VALUE OUT OF SIZE" if index > self.size
+		return "Sorry -1 array type indexing isnt working yet" if index < 0
+		index_val = self.head
+		index.times do 
+			index_val = index_val.next_node
+		end
+		index_val
 	end
 
 	def pop #removes the last element
+		new_last = self.size - 2
+		self.at(new_last).next_node = nil
 	end
 
-	def contains?(value) #returns true if the passed value is in the list otherwise returns false
+	def contains?(value_c) #returns true if the passed value is in the list otherwise returns false
+		count = 0
+		node_contain = self.head
+		return true if node_contain.value == value_c
+		while count < self.size do
+			if node_contain.value == value_c
+				return true
+				break
+			else
+				node_contain = node_contain.next_node
+			end
+			count += 1		
+		end
+		false
 	end
 
-	def find(data)#returns the index value for the passed value or nil if not found
+	def find(value_c)#returns the index value for the passed value or nil if not found
+		count = 0
+		node_contain = self.head
+		return 0 if node_contain.value == value_c
+		while count < self.size do
+			if node_contain.value == value_c
+				return count
+				break
+			else
+				node_contain = node_contain.next_node
+			end
+			count += 1		
+		end
+		nil
 	end
 
-	def to_s(msg = nil)#represents your linked list objects as strings so that you can preview them in the console
-		msg ||= ""
-		return msg[0..-4]if self.node.value.nil?
-		msg << "#{self.node.value} ->"
-		self.node.next_node.to_s
+	def to_s#represents your linked list objects as strings so that you can preview them in the console
+		msg = ""
+		start = self.head
+		return msg if self.head.next_node == nil
+		while start.next_node != nil
+			msg << "#{start.value} ->"
+			start = start.next_node
+		end
+		msg << " nil"
 	end
-
 end
 
 class Node
@@ -86,4 +122,13 @@ list_1.preappend(node_5)
 list_1.append(node_app)
 puts list_1.inspect
 puts list_1.size
-
+puts list_1.at(0).value
+puts list_1.at(1).value
+puts list_1.at(5).value
+list_1.pop
+list_1.inspect
+#list_1.contains?("3")
+puts list_1.size
+#puts list_1.contains?("apple")
+puts list_1.find("3")
+puts list_1.to_s
